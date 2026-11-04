@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пазл-код — Файлдармен жұмыс</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-card {
+            background: rgba(30, 41, 59, 0.95);
+            border: 2px solid #fde047;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        h2 {
+            color: #fde047;
+            text-align: center;
+            margin-top: 0;
+            font-size: 26px;
+        }
+        .context-box {
+            background: rgba(253, 224, 71, 0.1);
+            border-left: 4px solid #fde047;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #fde047;
+        }
+        .input-box {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #f8fafc;
+            font-size: 15px;
+        }
+        .question-block {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .question-title {
+            color: #fef08a;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .code-display {
+            background: #05050a;
+            color: #4ade80;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin-bottom: 12px;
+            border: 1px solid #334155;
+        }
+        .btn-check {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ca8a04, #eab308);
+            border: none;
+            border-radius: 12px;
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(234, 179, 8, 0.4);
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+        }
+        .level-badge {
+            display: inline-block;
+            background: #fde047;
+            color: #0f172a;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-card">
+    <div style="text-align: center;">
+        <span class="level-badge">9-ТАҚЫРЫП: ПРАКТИКАЛЫҚ КВЕСТ (10 ҰПАЙ)</span>
+    </div>
+    <h2>🧩 «Пазл-код» — Файлдармен жұмыс</h2>
+    
+    <div class="context-box">
+        <b>Өмірлік жағдаят:</b> Бағдарламашы мәтіндік файлдан ақпаратты оқып алу үшін Python кодының жолдарын шашып алды. Программа қатесіз жұмыс істеуі үшін командалардың ретін дұрыс жинаңыз! (Барлығы 5 қадам — 10 ұпай).
+    </div>
+
+    <div class="input-group">
+        <label for="student-name">Оқушының аты-жөні:</label>
+        <input type="text" id="student-name" class="input-box" placeholder="Аты-жөніңізді енгізіңіз...">
+    </div>
+
+    <!-- 1-Тапсырма -->
+    <div class="question-block">
+        <div class="question-title">1-тапсырма (2 балл): Файлды ашу қадамы</div>
+        <div class="code-display">Файлмен жұмысты бастау үшін ЕҢ БІРІНШІ қай жол орындалуы тиіс?</div>
+        <select id="q1" class="input-box">
+            <option value="">-- Кодты таңдаңыз --</option>
+            <option value="A">file = open('data.txt', 'r')</option>
+            <option value="B">content = file.read()</option>
+            <option value="C">file.close()</option>
+        </select>
+    </div>
+
+    <!-- 2-Тапсырма -->
+    <div class="question-block">
+        <div class="question-title">2-тапсырма (2 балл): Мәтінді оқу қадамы</div>
+        <div class="code-display">Файл ашылғаннан кейін оның ішіндегі деректерді оқып алу командасы:</div>
+        <select id="q2" class="input-box">
+            <option value="">-- Кодты таңдаңыз --</option>
+            <option value="A">file.open('data.txt')</option>
+            <option value="B">content = file.read()</option>
+            <option value="C">print(file)</option>
+        </select>
+    </div>
+
+    <!-- 3-Тапсырма -->
+    <div class="question-block">
+        <div class="question-title">3-тапсырма (2 балл): Деректерді бөліктерге бөлшектеу</div>
+        <div class="code-display">Жолдағы үтір арқылы жазылған деректерді жеке тізімге айналдыру әдісі:</div>
+        <select id="q3" class="input-box">
+            <option value="">-- Әдісті таңдаңыз --</option>
+            <option value="A">content.split(',')</option>
+            <option value="B">content.join()</option>
+            <option value="C">content.close()</option>
+        </select>
+    </div>
+
+    <!-- 4-Тапсырма -->
+    <div class="question-block">
+        <div class="question-title">4-тапсырма (2 балл): Файлды жабу қадамы</div>
+        <div class="code-display">Жадты босату үшін жұмыс соңында міндетті түрде орындалатын команда:</div>
+        <select id="q4" class="input-box">
+            <option value="">-- Кодты таңдаңыз --</option>
+            <option value="A">file.stop()</option>
+            <option value="B">file.close()</option>
+            <option value="C">file.delete()</option>
+        </select>
+    </div>
+
+    <!-- 5-Тапсырма -->
+    <div class="question-block">
+        <div class="question-title">5-тапсырма (2 балл): Қауіпсіз блок операторы</div>
+        <div class="code-display">Python-да файлды автоматты түрде жабатын қауіпсіз менеджер (контекст):</div>
+        <select id="q5" class="input-box">
+            <option value="">-- Операторды таңдаңыз --</option>
+            <option value="A">with open('data.txt', 'r') as file:</option>
+            <option value="B">while open('data.txt'):</option>
+            <option value="C">if open('data.txt'):</option>
+        </select>
+    </div>
+
+    <button class="btn-check" onclick="checkPuzzleAnswers()">🧩 Пазлды тексеру және тіркеу</button>
+
+    <div id="result" class="result-box"></div>
+</div>
+
+<script>
+    function checkPuzzleAnswers() {
+        const studentName = document.getElementById('student-name').value.trim();
+        const resDiv = document.getElementById('result');
+
+        if (!studentName) {
+            alert("⚠️ Ойынды бастамас бұрын аты-жөніңізді енгізіңіз!");
+            return;
+        }
+
+        let score = 0;
+
+        if (document.getElementById('q1').value === 'A') score += 2;
+        if (document.getElementById('q2').value === 'B') score += 2;
+        if (document.getElementById('q3').value === 'A') score += 2;
+        if (document.getElementById('q4').value === 'B') score += 2;
+        if (document.getElementById('q5').value === 'A') score += 2;
+
+        resDiv.style.display = "block";
+
+        if (score >= 8) {
+            resDiv.style.background = "rgba(34, 197, 94, 0.2)";
+            resDiv.style.border = "1px solid #22c55e";
+            resDiv.style.color = "#4ade80";
+            resDiv.innerHTML = `🎉 Керемет, <b>${studentName}</b>!<br>Файлмен жұмыс коды дұрыс жиналды!<br>🏆 <b>Нәтижеңіз: ${score} / 10 ұпай</b> 🌟`;
+        } else {
+            resDiv.style.background = "rgba(239, 68, 68, 0.2)";
+            resDiv.style.border = "1px solid #ef4444";
+            resDiv.style.color = "#f87171";
+            resDiv.innerHTML = `⚠️ <b>${studentName}</b>, кейбір қадамдар қате жиналды.<br>Код ретін қайта қараңыз.<br>📊 <b>Нәтижеңіз: ${score} / 10 ұпай</b>`;
+        }
+    }
+</script>
+
+</body>
+</html>
